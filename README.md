@@ -11,45 +11,71 @@
         - wget
         - unzip
 
-- buid image by Dockerfile
+- buid image
 
-        ./build.sh
+        - by Dockerfile
 
-- build image by commit (optional)
+                ./build.sh
 
-        - base image
+        - by commit (optional)
 
-                docker pull centos:centos8
-                docker run -it --name centos-jfrog-arm64 centos:centos8 bash
+                - base image
 
-        - install jfrog cli
+                        docker pull centos:centos8
+                        docker run -it --name centos-jfrog-arm64 centos:centos8 bash
 
-                curl -fL https://install-cli.jfrog.io | sh
-                jf c add
-                jf rt ping
+                - install jfrog cli
 
-        - install jdk
+                        curl -fL https://install-cli.jfrog.io | sh
+                        jf c add
+                        jf rt ping
 
-                cd /etc/yum.repos.d/
-                sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-                sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-                yum -y install java
-                java -version
+                - install jdk
 
-        - install maven
+                        cd /etc/yum.repos.d/
+                        sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+                        sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+                        yum -y install java
+                        java -version
 
-                yum install -y maven
+                - install maven
 
-        - install others
+                        yum install -y maven
 
-                yum install -y wget
-                yum install -y unzip
+                - install others
 
-        - commit docker & save image
+                        yum install -y wget
+                        yum install -y unzip
 
-                docker commit centos-jfrog-arm64 centos:jfrog-arm64
-                docker save -o centos-jfrog-arm64.tar centos:jfrog-arm64
-        
+                - commit docker & save image
+
+                        docker commit centos-jfrog-arm64 centos:jfrog-arm64
+                        docker save -o centos-jfrog-arm64.tar centos:jfrog-arm64
+
+- prepare
+
+        - jfrog artifactory access info
+
+                e.g.
+                jfrog artifactory URL = http://x.x.x.x:8082
+                username/password = admin/xxxxxx
+                access token = xxx.xxx.xxx
+
+![image info](./images/token.png)
+
+                api key = xxxxxx
+
+![image info](./images/apikey1.png)
+![image info](./images/apikey2.png)
+
+        - repositories created
+
+                e.g.
+                app1-maven-snapshot-virtual
+                app1-maven-release-virtual
+
+![image info](./images/repo.png)
+
 - run & configure
 
         1. pull / load image
