@@ -52,7 +52,7 @@
         
 - run & configure
 
-        - pull / load image
+        1. pull / load image
 
                 # docker login -u kyle demo.jfrogchina.com
                 docker pull demo.jfrogchina.com/app1-docker-dev-local/centos:jfrog-amd64
@@ -63,14 +63,14 @@
 
 ![image info](./images/load.png)
 
-        - run
+        2. run
         
                 docker run -it --name centos-jfrog-arm64 centos:jfrog-amd64 bash
                 docker run -it --name centos-jfrog-arm64 centos:jfrog-arm64 bash
 
 ![image info](./images/run.png)
 
-        - configure jfrog cli
+        3. configure jfrog cli
         
                 jf c add
 
@@ -80,7 +80,7 @@
 
 ![image info](./images/jf-c.png)
 
-        - test
+        4. test
         
                 jf c show
                 jf rt ping
