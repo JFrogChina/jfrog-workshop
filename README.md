@@ -49,18 +49,27 @@
 
                 docker commit centos-jfrog-arm64 centos:jfrog-arm64
                 docker save -o centos-jfrog-arm64.tar centos:jfrog-arm64
-
-        - load image
-
-            docker load < centos-jfrog-arm64.tar
-
-- run
         
+- run & configure
+
+        - pull / load image
+
+                # docker login -u kyle demo.jfrogchina.com
+                docker pull demo.jfrogchina.com/app1-docker-dev-local/centos:jfrog-amd64
+                docker pull demo.jfrogchina.com/app1-docker-dev-local/centos:jfrog-arm64
+
+                docker load < centos-jfrog-amd64.tar
+                docker load < centos-jfrog-arm64.tar
+
+![image info](./images/load.png)
+
         - run
         
                 docker run -it --name centos-jfrog-arm64 centos:jfrog-amd64 bash
                 docker run -it --name centos-jfrog-arm64 centos:jfrog-arm64 bash
-        
+
+![image info](./images/run.png)
+
         - configure jfrog cli
         
                 jf c add
@@ -69,10 +78,14 @@
                 server ID = art-china (please use this ID for later maven demo)
                 access token = xxx
 
+![image info](./images/jf-c.png)
+
         - test
         
                 jf c show
                 jf rt ping
+
+![image info](./images/jf-ping.png)
 
 - maven demo
 
@@ -80,14 +93,26 @@
         
                 cd ~
                 wget https://github.com/kyle11235/maven-example/archive/refs/heads/master.zip
-                unzip ...
-                cd maven-example
+                unzip master.zip
+                cd maven-example-master
+
+![image info](./images/wget.png)
+
+                maven.yaml configured in this project for jfrog cli to work
+                the serverId: art-china is already configured in jfrog cli in previous steps
+
+![image info](./images/maven-yaml.png)
 
         2. build & deploy to artifactory
         
                 ./cli_maven_build.sh
 
+![image info](./images/maven-install.png)
+
         3. xray scan
         
                 jf s multi3/target/multi3-4.7-SNAPSHOT.war
+
+![image info](./images/jf-scan.png)
+
 
