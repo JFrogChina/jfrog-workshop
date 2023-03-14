@@ -57,16 +57,22 @@
 - run
         
         - run
-        docker run -it --name centos-jfrog-arm64 centos:jfrog-amd64 bash
-        docker run -it --name centos-jfrog-arm64 centos:jfrog-arm64 bash
+        
+                docker run -it --name centos-jfrog-arm64 centos:jfrog-amd64 bash
+                docker run -it --name centos-jfrog-arm64 centos:jfrog-arm64 bash
         
         - configure jfrog cli
-        jf c add
-        input jfrog artifactory URL & access token
+        
+                jf c add
+
+                e.g.
+                server ID = art-china (please use this ID for later maven demo)
+                access token = xxx
 
         - test
-        jf c show
-        jf rt ping
+        
+                jf c show
+                jf rt ping
 
 - maven demo
 
