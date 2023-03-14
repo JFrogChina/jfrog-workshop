@@ -1,7 +1,7 @@
 
 # docker image for workshop
 
-- desc
+## desc
 
         based on centos:centos8, below tools are installed:
         
@@ -11,7 +11,7 @@
         - wget
         - unzip
 
-- buid image
+## buid image
 
         - by Dockerfile
 
@@ -52,7 +52,7 @@
                         docker commit centos-jfrog-arm64 centos:jfrog-arm64
                         docker save -o centos-jfrog-arm64.tar centos:jfrog-arm64
 
-- prepare
+## prepare
 
         - jfrog artifactory access info
 
@@ -76,7 +76,7 @@
 
 ![image info](./images/repo.png)
 
-- run & configure
+## run & configure
 
         1. pull / load image
 
@@ -113,7 +113,7 @@
 
 ![image info](./images/jf-ping.png)
 
-- maven demo
+## maven demo
 
         1. preprare source code
         
