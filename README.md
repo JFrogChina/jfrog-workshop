@@ -19,18 +19,18 @@
 
         - by commit (optional)
 
-                - base image
+                1. base image
 
                         docker pull centos:centos8
                         docker run -it --name centos-jfrog-arm64 centos:centos8 bash
 
-                - install jfrog cli
+                2. install jfrog cli
 
                         curl -fL https://install-cli.jfrog.io | sh
                         jf c add
                         jf rt ping
 
-                - install jdk
+                3. install jdk
 
                         cd /etc/yum.repos.d/
                         sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
@@ -38,16 +38,16 @@
                         yum -y install java
                         java -version
 
-                - install maven
+                4. install maven
 
                         yum install -y maven
 
-                - install others
+                5. install others
 
                         yum install -y wget
                         yum install -y unzip
 
-                - commit docker & save image
+                6. commit docker & save image
 
                         docker commit centos-jfrog-arm64 centos:jfrog-arm64
                         docker save -o centos-jfrog-arm64.tar centos:jfrog-arm64
@@ -61,12 +61,13 @@
                 username/password = admin/xxxxxx
                 access token = xxx.xxx.xxx
 
-![image info](./images/token.png)
+
+<img src="./images/token.png" width="80%" style="margin-left: 100px" >
 
                 api key = xxxxxx
 
-![image info](./images/apikey1.png)
-![image info](./images/apikey2.png)
+<img src="./images/apikey1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/apikey2.png" width="80%" style="margin-left: 100px" >
 
         - repositories created
 
@@ -74,7 +75,7 @@
                 app1-maven-snapshot-virtual
                 app1-maven-release-virtual
 
-![image info](./images/repo.png)
+<img src="./images/repo.png" width="80%" style="margin-left: 100px" >
 
 ## run & configure
 
@@ -87,14 +88,14 @@
                 docker load < centos-jfrog-amd64.tar
                 docker load < centos-jfrog-arm64.tar
 
-![image info](./images/load.png)
+<img src="./images/load.png" width="80%" style="margin-left: 100px" >
 
         2. run
         
                 docker run -it --name centos-jfrog-arm64 centos:jfrog-amd64 bash
                 docker run -it --name centos-jfrog-arm64 centos:jfrog-arm64 bash
 
-![image info](./images/run.png)
+<img src="./images/run.png" width="80%" style="margin-left: 100px" >
 
         3. configure jfrog cli
         
@@ -104,14 +105,14 @@
                 server ID = art-china (please use this ID for later maven demo)
                 access token = xxx
 
-![image info](./images/jf-c.png)
+<img src="./images/jf-c.png" width="80%" style="margin-left: 100px" >
 
         4. test
         
                 jf c show
                 jf rt ping
 
-![image info](./images/jf-ping.png)
+<img src="./images/jf-ping.png" width="80%" style="margin-left: 100px" >
 
 ## maven demo
 
@@ -122,23 +123,24 @@
                 unzip master.zip
                 cd maven-example-master
 
-![image info](./images/wget.png)
+<img src="./images/wget.png" width="80%" style="margin-left: 100px" >
 
                 maven.yaml configured in this project for jfrog cli to work
                 the serverId: art-china is already configured in jfrog cli in previous steps
 
-![image info](./images/maven-yaml.png)
+<img src="./images/maven-yaml.png" width="80%" style="margin-left: 100px" >
 
         2. build & deploy to artifactory
         
                 ./cli_maven_build.sh
 
-![image info](./images/maven-install.png)
+<img src="./images/maven-install.png" width="80%" style="margin-left: 100px" >
 
         3. xray scan
         
                 jf s multi3/target/multi3-4.7-SNAPSHOT.war
 
-![image info](./images/jf-scan.png)
+<img src="./images/jf-scan.png" width="80%" style="margin-left: 100px" >
+
 
 
