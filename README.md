@@ -1,15 +1,21 @@
 
 # workshop guide
 
-
 ## maven build & scan demo
 
 - 描述
 
-        1. 小张（制品库管理） - 从 0 开始创建 Artifactory 仓库，配置 Xray 索引
-        2. 小王（开发） - 使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
-        3. 小李（开发） - 使用 JFrog CLI 对本地 war 包进行 Xray 扫描
-        4. 小赵（安全管理）- 配置 Xray 的监控策略，阻止漏洞组件的下载使用
+        1. 小张（制品库管理）
+        从 0 开始创建 Artifactory 仓库，配置 Xray 索引
+
+        2. 小王（开发）
+        使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
+
+        3. 小李（开发）
+        使用 JFrog CLI 对本地 war 包进行 Xray 扫描
+
+        4. 小赵（安全管理）
+        配置 Xray 的监控策略，阻止漏洞组件的下载使用
 
 - 准备
 
@@ -32,7 +38,7 @@
                         - wget
                         - unzip
 
-                - 选择2，使用已经安装以上工具的 docker 镜像
+                - 选择2，使用提供的已经安装以上工具的 docker 镜像
 
                         centos-jfrog-amd64.tar
                         centos-jfrog-arm64.tar
@@ -67,7 +73,7 @@
         
 2. 使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
 
-        - 如果你使用提供的 docker 镜像作为构建环境，先导入景象
+        - 如果你使用提供的 docker 镜像作为构建环境，先导入镜像
         
                 docker load < centos-jfrog-amd64.tar
                 docker load < centos-jfrog-arm64.tar
