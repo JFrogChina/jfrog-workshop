@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="workshop-guide">workshop guide</h1>
+<h2 id="maven-build--scan-demo">maven build &amp; scan demo</h2>
+<ul>
+<li>
+<p>描述</p>
+<pre><code>  1. 小张（制品库管理）
+  从 0 开始创建 Artifactory 仓库，配置 Xray 索引
+
+  2. 小王（开发）
+  使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
+
+  3. 小李（开发）
+  使用 JFrog CLI 对本地 war 包进行 Xray 扫描
+
+  4. 小赵（安全管理）
+  配置 Xray 的监控策略，阻止漏洞组件的下载使用
+</code></pre>
+</li>
+<li>
+<p>准备</p>
+<pre><code>  1. artifactory 账号
+  
+          e.g.
+          jfrog artifactory URL = http://x.x.x.x:8082
+          username/password = admin/xxxxxx
+          api key = xxxxxx
+
+  2. 构建环境
+  
+          - 选择1，直接安装以下工具
+          
+                  - jfrog cli
+                  https://www.jfrog.com/confluence/display/CLI/JFrog+CLI
+
+                  - java
+                  - maven
+                  - wget
+                  - unzip
+
+          - 选择2，使用提供的已经安装以上工具的 docker 镜像
+
+                  centos-jfrog-amd64.tar
+                  centos-jfrog-arm64.tar
+                  ...
+                  
+  3. maven 项目
+
+          提供的 maven-example.zip
+          此项目包含 log4j 等漏洞组件，也可以从 github 下载 https://github.com/kyle11235/maven-example/
+</code></pre>
+</li>
+<li>
+<p>开始</p>
+<pre><code>  1. 从 0 开始创建 Artifactory 仓库，配置 Xray 索引
+
+          e.g.
+          app1-maven-central-remote
+
+          app1-maven-snapshot-local
+          app1-maven-release-local
+
+          app1-maven-snapshot-virtual
+          app1-maven-release-virtual
+
+          app1-docker-dev-local
+</code></pre>
+</li>
+</ul>
+<img src="./images/local1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/local2.png" width="80%" style="margin-left: 100px" >
+<img src="./images/remote.png" width="80%" style="margin-left: 100px" >
+<img src="./images/virtual2.png" width="80%" style="margin-left: 100px" >
+<img src="./images/virtual1.png" width="80%" style="margin-left: 100px" >
+<ol start="2">
+<li>
+<p>使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j</p>
+<pre><code> - 如果你使用提供的 docker 镜像作为构建环境，先导入镜像
+ 
+         docker load &lt; centos-jfrog-amd64.tar
+         docker load &lt; centos-jfrog-arm64.tar
+</code></pre>
+</li>
+</ol>
+<img src="./images/load.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 运行
+    
+            进入到 maven-example.zip 所在目录下，以下命令会挂载当前目录，使你在 docker 容器中能够访问到 maven-example.zip
+            选择适合你电脑型号的镜像
+
+            docker run -it --name centos-jfrog-arm64 -v $(pwd):/root centos:jfrog-amd64 bash
+            docker run -it --name centos-jfrog-arm64 -v $(pwd):/root centos:jfrog-arm64 bash
+
+            启动后可以做一些检查
+            cd ~
+            ls
+            jf -v
+            java -version
+            mvn -v
+</code></pre>
+<img src="./images/run.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - configure jfrog cli
+    
+            jf c add
+
+            e.g.
+            server ID = art-china (please use this ID for later maven demo)
+</code></pre>
+<img src="./images/jf-c-add.png" width="80%" style="margin-left: 100px" >
+<img src="./images/jf-c-add1.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 进入 maven 项目目录
+    
+            cd ~
+            unzip maven-example.zip
+            cd maven-example
+
+    - 修改 maven.yaml
+
+            vi .jfrog/projects/maven.yaml
+
+            serverId: art-china 对应之前配置 jfrog cli 的 serverId
+            
+            仓库名称，请更改为你自己的, e.g.
+            team1-maven-snapshot-virtual
+            team1-maven-release-virtual
+</code></pre>
+<img src="./images/maven-yaml.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - build &amp; deploy to artifactory
+    
+            ./cli_maven_build.sh
+</code></pre>
+<img src="./images/maven-install.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 查看上传的制品和扫描的漏洞
+</code></pre>
+<img src="./images/check-repo.png" width="80%" style="margin-left: 100px" >
+<ol start="3">
+<li>
+<p>使用 JFrog CLI 对本地 war 包进行 Xray 扫描</p>
+<pre><code>  jf s multi3/target/multi3-4.7-SNAPSHOT.war
+</code></pre>
+</li>
+</ol>
+<img src="./images/jf-scan.png" width="80%" style="margin-left: 100px" >
+<ol start="4">
+<li>
+<p>配置 Xray 的监控策略，阻止漏洞组件的下载使用</p>
+<pre><code> - 创建 policy
+</code></pre>
+</li>
+</ol>
+<img src="./images/policy.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 设置 rule 的规则如果包含高危漏洞组件，则下载
+</code></pre>
+<img src="./images/rule.png" width="80%" style="margin-left: 100px" >
+<img src="./images/rule1.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 创建 policy, rule, watch，为 watch 选中所有仓库和 rule
+</code></pre>
+<img src="./images/watch.png" width="80%" style="margin-left: 100px" >
+<img src="./images/watch1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/watch2.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 为仓库中已有的制品点击扫描生成违反警告
+</code></pre>
+<img src="./images/watch3.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 再次查看仓库中制品，尝试下载，发现已被阻止
+</code></pre>
+<img src="./images/block.png" width="80%" style="margin-left: 100px" >
+<h2 id="docker-build--scan-demo%E6%AD%A4%E9%83%A8%E5%88%86%E6%97%A0%E9%9C%80%E5%8A%A8%E6%89%8B%E5%AE%9E%E9%AA%8C%E4%BB%85%E4%BE%9B%E4%BA%86%E8%A7%A3">docker build &amp; scan demo（此部分无需动手实验，仅供了解）</h2>
+<pre><code>    - 在你的开发环境，为了访问未开启 https 的镜像仓库，做以下更改，重启 docker
+</code></pre>
+<img src="./images/docker.png" width="80%" style="margin-left: 100px" >
+<pre><code>            也可以通过命名更改这个配置
+            
+            vi /etc/docker/daemon.json
+
+            {
+            &quot;insecure-registries&quot;: [
+            &quot;39.106.70.224:80&quot;
+            ]
+            }
+
+    - 在 artifactory 服务器端配置 nginx 代理 artifactory，nginx 配置可以在 artifactory 中生成
+</code></pre>
+<img src="./images/nginx.png" width="80%" style="margin-left: 100px" >
+<img src="./images/nginx1.png" width="80%" style="margin-left: 100px" >
+<pre><code>    - 构建 docker 镜像
+    
+            完成上一个 maven 构建的实验后，从构建容器环境中退出，来到 maven-example 目录下
+            更改 build_docker.sh 中的用户名和 docker 仓库名称
+
+            开始构建，输入你的密码登录
+            ./build_docker.sh
+</code></pre>
+<img src="./images/build-docker.png" width="80%" style="margin-left: 100px" >
+<pre><code>            在 artifacotry docker 镜像仓库中查看被上传的镜像
+</code></pre>
+<img src="./images/build-docker.png" width="80%" style="margin-left: 100px" >
+<pre><code>            对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
+</code></pre>
+<img src="./images/docker-issue.png" width="80%" style="margin-left: 100px" >
+<img src="./images/docker-issue1.png" width="80%" style="margin-left: 100px" >
+
+</body>
+</html>
