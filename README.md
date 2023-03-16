@@ -1,7 +1,7 @@
 
 # workshop guide
 
-## maven build & scan demo
+## 实验 1 - maven build & scan demo
 
 - 描述
 
@@ -22,11 +22,24 @@
         1. artifactory 账号
         
                 e.g.
-                jfrog artifactory URL = http://x.x.x.x:8082
-                username/password = admin/xxxxxx
-                api key = xxxxxx
+                jfrog artifactory URL = http://39.106.70.224:8082
+                username/password = team1/xxxxxx, team2/xxxxxx ...
 
-        2. 构建环境
+                以上由现场工作人员提供
+
+        2. 实验材料
+        
+                - 选择1，登录 artifactory
+                
+                        http://39.106.70.224:8082/artifactory/app1-generic-dev-local/
+
+                        访问 app1-generic-dev-local 仓库，可以从中下载本次实验材料，按需下载，节省时间
+
+<img src="./images/guide.png" width="80%" style="margin-left: 100px" >
+
+                - 选择2，如果现场人员提供了 USB，也可以从中拷贝以上材料
+
+        3. 构建环境
         
                 - 选择1，直接安装以下工具
                 
@@ -38,42 +51,58 @@
                         - wget
                         - unzip
 
-                - 选择2，使用提供的已经安装以上工具的 docker 镜像
+                - 选择2，从以上实验材料中获得 docker 镜像的导出包，其中已经安装以上工具
 
                         centos-jfrog-amd64.tar
                         centos-jfrog-arm64.tar
                         ...
-                        
-        3. maven 项目
 
-                提供的 maven-example.zip
+<img src="./images/guide1.png" width="80%" style="margin-left: 100px" >
+
+        4. maven 项目
+
+                从以上实验材料中获得 maven-example.zip
                 此项目包含 log4j 等漏洞组件，也可以从 github 下载 https://github.com/kyle11235/maven-example/
+
+<img src="./images/guide2.png" width="80%" style="margin-left: 100px" >
 
 - 开始
 
         1. 从 0 开始创建 Artifactory 仓库，配置 Xray 索引
 
                 e.g.
-                app1-maven-central-remote
+                team1-maven-central-remote
 
-                app1-maven-snapshot-local
-                app1-maven-release-local
+                team1-maven-snapshot-local
+                team1-maven-release-local
 
-                app1-maven-snapshot-virtual
-                app1-maven-release-virtual
+                team1-maven-snapshot-virtual
+                team1-maven-release-virtual
 
-                app1-docker-dev-local
+                team1-docker-dev-local
 
 <img src="./images/local1.png" width="80%" style="margin-left: 100px" >
+
+                注意为 local 和 remote 仓库开启 Xray 索引
+
 <img src="./images/local2.png" width="80%" style="margin-left: 100px" >
+
 <img src="./images/remote.png" width="80%" style="margin-left: 100px" >
+
+                创建 2个 maven 虚拟仓库
+
 <img src="./images/virtual2.png" width="80%" style="margin-left: 100px" >
+
+                虚拟仓库中包含 local 和 remote 类型仓库，如
+                team1-maven-snapshot-virtual 包含 team1-maven-snapshot-local 和 team1-maven-central-remote
+                team1-maven-release-virtual 包含 team1-maven-release-local 和 team1-maven-central-remote
+
 <img src="./images/virtual1.png" width="80%" style="margin-left: 100px" >
 
         
 2. 使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
 
-        - 如果你使用提供的 docker 镜像作为构建环境，先导入镜像
+        - 如果你使用提供的 docker 镜像导出文件作为构建环境，先导入镜像
         
                 docker load < centos-jfrog-amd64.tar
                 docker load < centos-jfrog-arm64.tar
@@ -96,7 +125,6 @@
                 mvn -v
 
 <img src="./images/run.png" width="80%" style="margin-left: 100px" >
-
 
         - configure jfrog cli
         
@@ -167,43 +195,55 @@
 
 <img src="./images/block.png" width="80%" style="margin-left: 100px" >
 
-## docker build & scan demo（此部分无需动手实验，仅供了解）
 
-        - 在你的开发环境，为了访问未开启 https 的镜像仓库，做以下更改，重启 docker
 
-<img src="./images/docker.png" width="80%" style="margin-left: 100px" >
 
-                也可以通过命名更改这个配置
+## 实验 2 - docker build & scan demo
+
+        1. 在你的开发环境，为了访问未开启 https 的镜像仓库，做以下更改，重启 docker
+
+                - 选择1，通过 docker desktop 页面更改后重启
+
+<img src="./images/restart-docker.png" width="80%" style="margin-left: 100px" >
+
+                - 选择2，也可以通过命令更改这个配置（文件位置可能由于你的操作系统而不同）
                 
-                vi /etc/docker/daemon.json
+                        vi /etc/docker/daemon.json
 
-                {
-                "insecure-registries": [
-                "39.106.70.224:80"
-                ]
-                }
+                        {
+                                "insecure-registries": [
+                                "39.106.70.224:8081",
+                                "39.106.70.224:8082"
+                                ]
+                        }
 
-        - 在 artifactory 服务器端配置 nginx 代理 artifactory，nginx 配置可以在 artifactory 中生成
-
-<img src="./images/nginx.png" width="80%" style="margin-left: 100px" >
-<img src="./images/nginx1.png" width="80%" style="margin-left: 100px" >
-
-        - 构建 docker 镜像
+        2. 构建 docker 镜像
         
                 完成上一个 maven 构建的实验后，从构建容器环境中退出，来到 maven-example 目录下
-                更改 build_docker.sh 中的用户名和 docker 仓库名称
+                
+                请在以下命令中使用成你的用户名，例如 team1
+                请在以下命令中使用你的仓库名，例如 team1-docker-dev-local
 
-                开始构建，输入你的密码登录
-                ./build_docker.sh
+                2.1 构建镜像，注意 build 端口是 8082
+                docker build -t 39.106.70.224:8082/team1-docker-dev-local/maven-example .
+                
+                2.3 登录镜像仓库，注意 login 端口是 8081, 输入你的密码
+                docker login -u team1 39.106.70.224:8081
 
-<img src="./images/build-docker.png" width="80%" style="margin-left: 100px" >
+                2.3 登录后执行上传
+                注意 push 端口是 8082
 
+                docker push 39.106.70.224:8082/team1-docker-dev-local/maven-example
 
-                在 artifacotry docker 镜像仓库中查看被上传的镜像
+<img src="./images/push.png" width="80%" style="margin-left: 100px" >
 
-<img src="./images/build-docker.png" width="80%" style="margin-left: 100px" >
+        3. 在 artifacotry docker 镜像仓库中查看被上传的镜像
 
-                对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
+                你的 docker 仓库名称为 team1-docker1-dev-local 等
+
+<img src="./images/docker-repo.png" width="80%" style="margin-left: 100px" >
+
+        4. 对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
 
 <img src="./images/docker-issue.png" width="80%" style="margin-left: 100px" >
 <img src="./images/docker-issue1.png" width="80%" style="margin-left: 100px" >

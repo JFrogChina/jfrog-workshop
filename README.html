@@ -366,7 +366,7 @@ code {
     });
   </script>
 <h1 id="workshop-guide">workshop guide</h1>
-<h2 id="maven-build--scan-demo">maven build &amp; scan demo</h2>
+<h2 id="%E5%AE%9E%E9%AA%8C-1---maven-build--scan-demo">实验 1 - maven build &amp; scan demo</h2>
 <ul>
 <li>
 <p>描述</p>
@@ -388,60 +388,84 @@ code {
 <pre><code>  1. artifactory 账号
   
           e.g.
-          jfrog artifactory URL = http://x.x.x.x:8082
-          username/password = admin/xxxxxx
-          api key = xxxxxx
+          jfrog artifactory URL = http://39.106.70.224:8082
+          username/password = team1/xxxxxx, team2/xxxxxx ...
 
-  2. 构建环境
+          以上由现场工作人员提供
+
+  2. 实验材料
   
-          - 选择1，直接安装以下工具
+          - 选择1，登录 artifactory
           
-                  - jfrog cli
-                  https://www.jfrog.com/confluence/display/CLI/JFrog+CLI
+                  http://39.106.70.224:8082/artifactory/app1-generic-dev-local/
 
-                  - java
-                  - maven
-                  - wget
-                  - unzip
-
-          - 选择2，使用提供的已经安装以上工具的 docker 镜像
-
-                  centos-jfrog-amd64.tar
-                  centos-jfrog-arm64.tar
-                  ...
-                  
-  3. maven 项目
-
-          提供的 maven-example.zip
-          此项目包含 log4j 等漏洞组件，也可以从 github 下载 https://github.com/kyle11235/maven-example/
+                  访问 app1-generic-dev-local 仓库，可以从中下载本次实验材料，按需下载，节省时间
 </code></pre>
 </li>
+</ul>
+<img src="./images/guide.png" width="80%" style="margin-left: 100px" >
+<pre><code>            - 选择2，如果现场人员提供了 USB，也可以从中拷贝以上材料
+
+    3. 构建环境
+    
+            - 选择1，直接安装以下工具
+            
+                    - jfrog cli
+                    https://www.jfrog.com/confluence/display/CLI/JFrog+CLI
+
+                    - java
+                    - maven
+                    - wget
+                    - unzip
+
+            - 选择2，从以上实验材料中获得 docker 镜像的导出包，其中已经安装以上工具
+
+                    centos-jfrog-amd64.tar
+                    centos-jfrog-arm64.tar
+                    ...
+</code></pre>
+<img src="./images/guide1.png" width="80%" style="margin-left: 100px" >
+<pre><code>    4. maven 项目
+
+            从以上实验材料中获得 maven-example.zip
+            此项目包含 log4j 等漏洞组件，也可以从 github 下载 https://github.com/kyle11235/maven-example/
+</code></pre>
+<img src="./images/guide2.png" width="80%" style="margin-left: 100px" >
+<ul>
 <li>
 <p>开始</p>
 <pre><code>  1. 从 0 开始创建 Artifactory 仓库，配置 Xray 索引
 
           e.g.
-          app1-maven-central-remote
+          team1-maven-central-remote
 
-          app1-maven-snapshot-local
-          app1-maven-release-local
+          team1-maven-snapshot-local
+          team1-maven-release-local
 
-          app1-maven-snapshot-virtual
-          app1-maven-release-virtual
+          team1-maven-snapshot-virtual
+          team1-maven-release-virtual
 
-          app1-docker-dev-local
+          team1-docker-dev-local
 </code></pre>
 </li>
 </ul>
 <img src="./images/local1.png" width="80%" style="margin-left: 100px" >
+<pre><code>            注意为 local 和 remote 仓库开启 Xray 索引
+</code></pre>
 <img src="./images/local2.png" width="80%" style="margin-left: 100px" >
 <img src="./images/remote.png" width="80%" style="margin-left: 100px" >
+<pre><code>            创建 2个 maven 虚拟仓库
+</code></pre>
 <img src="./images/virtual2.png" width="80%" style="margin-left: 100px" >
+<pre><code>            虚拟仓库中包含 local 和 remote 类型仓库，如
+            team1-maven-snapshot-virtual 包含 team1-maven-snapshot-local 和 team1-maven-central-remote
+            team1-maven-release-virtual 包含 team1-maven-release-local 和 team1-maven-central-remote
+</code></pre>
 <img src="./images/virtual1.png" width="80%" style="margin-left: 100px" >
 <ol start="2">
 <li>
 <p>使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j</p>
-<pre><code> - 如果你使用提供的 docker 镜像作为构建环境，先导入镜像
+<pre><code> - 如果你使用提供的 docker 镜像导出文件作为构建环境，先导入镜像
  
          docker load &lt; centos-jfrog-amd64.tar
          docker load &lt; centos-jfrog-arm64.tar
@@ -530,37 +554,48 @@ code {
 <pre><code>    - 再次查看仓库中制品，尝试下载，发现已被阻止
 </code></pre>
 <img src="./images/block.png" width="80%" style="margin-left: 100px" >
-<h2 id="docker-build--scan-demo%E6%AD%A4%E9%83%A8%E5%88%86%E6%97%A0%E9%9C%80%E5%8A%A8%E6%89%8B%E5%AE%9E%E9%AA%8C%E4%BB%85%E4%BE%9B%E4%BA%86%E8%A7%A3">docker build &amp; scan demo（此部分无需动手实验，仅供了解）</h2>
-<pre><code>    - 在你的开发环境，为了访问未开启 https 的镜像仓库，做以下更改，重启 docker
+<h2 id="%E5%AE%9E%E9%AA%8C-2---docker-build--scan-demo">实验 2 - docker build &amp; scan demo</h2>
+<pre><code>    1. 在你的开发环境，为了访问未开启 https 的镜像仓库，做以下更改，重启 docker
+
+            - 选择1，通过 docker desktop 页面更改后重启
 </code></pre>
-<img src="./images/docker.png" width="80%" style="margin-left: 100px" >
-<pre><code>            也可以通过命名更改这个配置
+<img src="./images/restart-docker.png" width="80%" style="margin-left: 100px" >
+<pre><code>            - 选择2，也可以通过命令更改这个配置（文件位置可能由于你的操作系统而不同）
             
-            vi /etc/docker/daemon.json
+                    vi /etc/docker/daemon.json
 
-            {
-            &quot;insecure-registries&quot;: [
-            &quot;39.106.70.224:80&quot;
-            ]
-            }
+                    {
+                            &quot;insecure-registries&quot;: [
+                            &quot;39.106.70.224:8081&quot;,
+                            &quot;39.106.70.224:8082&quot;
+                            ]
+                    }
 
-    - 在 artifactory 服务器端配置 nginx 代理 artifactory，nginx 配置可以在 artifactory 中生成
-</code></pre>
-<img src="./images/nginx.png" width="80%" style="margin-left: 100px" >
-<img src="./images/nginx1.png" width="80%" style="margin-left: 100px" >
-<pre><code>    - 构建 docker 镜像
+    2. 构建 docker 镜像
     
             完成上一个 maven 构建的实验后，从构建容器环境中退出，来到 maven-example 目录下
-            更改 build_docker.sh 中的用户名和 docker 仓库名称
+            
+            请在以下命令中使用成你的用户名，例如 team1
+            请在以下命令中使用你的仓库名，例如 team1-docker-dev-local
 
-            开始构建，输入你的密码登录
-            ./build_docker.sh
+            2.1 构建镜像，注意 build 端口是 8082
+            docker build -t 39.106.70.224:8082/team1-docker-dev-local/maven-example .
+            
+            2.3 登录镜像仓库，注意 login 端口是 8081, 输入你的密码
+            docker login -u team1 39.106.70.224:8081
+
+            2.3 登录后执行上传
+            注意 push 端口是 8082
+
+            docker push 39.106.70.224:8082/team1-docker-dev-local/maven-example
 </code></pre>
-<img src="./images/build-docker.png" width="80%" style="margin-left: 100px" >
-<pre><code>            在 artifacotry docker 镜像仓库中查看被上传的镜像
+<img src="./images/push.png" width="80%" style="margin-left: 100px" >
+<pre><code>    3. 在 artifacotry docker 镜像仓库中查看被上传的镜像
+
+            你的 docker 仓库名称为 team1-docker1-dev-local 等
 </code></pre>
-<img src="./images/build-docker.png" width="80%" style="margin-left: 100px" >
-<pre><code>            对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
+<img src="./images/docker-repo.png" width="80%" style="margin-left: 100px" >
+<pre><code>    4. 对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
 </code></pre>
 <img src="./images/docker-issue.png" width="80%" style="margin-left: 100px" >
 <img src="./images/docker-issue1.png" width="80%" style="margin-left: 100px" >
