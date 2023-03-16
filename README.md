@@ -35,7 +35,7 @@
 
                         访问 app1-generic-dev-local 仓库，可以从中下载本次实验材料，按需下载，节省时间
 
-<img src="./images/guide.png" width="80%" style="margin-left: 100px" >
+<img src="./images/guide.png" width="100%"  >
 
                 - 选择2，如果现场人员提供了 USB，也可以从中拷贝以上材料
 
@@ -57,14 +57,14 @@
                         centos-jfrog-arm64.tar
                         ...
 
-<img src="./images/guide1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/guide1.png" width="100%"  >
 
         4. maven 项目
 
                 从以上实验材料中获得 maven-example.zip
                 此项目包含 log4j 等漏洞组件，也可以从 github 下载 https://github.com/kyle11235/maven-example/
 
-<img src="./images/guide2.png" width="80%" style="margin-left: 100px" >
+<img src="./images/guide2.png" width="100%"  >
 
 - 开始实验
 
@@ -83,23 +83,23 @@
 
                         team1-docker-dev-local
 
-<img src="./images/local1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/local1.png" width="100%"  >
 
                 1.2 注意为 local 和 remote 仓库开启 Xray 索引
 
-<img src="./images/local2.png" width="80%" style="margin-left: 100px" >
+<img src="./images/local2.png" width="100%"  >
 
-<img src="./images/remote.png" width="80%" style="margin-left: 100px" >
+<img src="./images/remote.png" width="100%"  >
 
                 1.3 创建 2个 maven 虚拟仓库
 
-<img src="./images/virtual2.png" width="80%" style="margin-left: 100px" >
+<img src="./images/virtual2.png" width="100%"  >
 
                 虚拟仓库中包含 local 和 remote 类型仓库，如
                 team1-maven-snapshot-virtual 包含 team1-maven-snapshot-local 和 team1-maven-central-remote
                 team1-maven-release-virtual 包含 team1-maven-release-local 和 team1-maven-central-remote
 
-<img src="./images/virtual1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/virtual1.png" width="100%"  >
 
         
         2. 使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
@@ -109,7 +109,7 @@
                         docker load < centos-jfrog-amd64.tar
                         docker load < centos-jfrog-arm64.tar
 
-<img src="./images/load.png" width="80%" style="margin-left: 100px" >
+<img src="./images/load.png" width="100%"  >
 
                 2.2 运行
                 
@@ -126,7 +126,7 @@
                         java -version
                         mvn -v
 
-<img src="./images/run.png" width="80%" style="margin-left: 100px" >
+<img src="./images/run.png" width="100%"  >
 
                 2.3 configure jfrog cli
                 
@@ -135,8 +135,8 @@
                         e.g.
                         server ID = art-china (please use this ID for later maven demo)
 
-<img src="./images/jf-c-add.png" width="80%" style="margin-left: 100px" >
-<img src="./images/jf-c-add1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/jf-c-add.png" width="100%"  >
+<img src="./images/jf-c-add1.png" width="100%"  >
 
                 2.4 进入 maven 项目目录
                 
@@ -154,48 +154,48 @@
                         team1-maven-snapshot-virtual
                         team1-maven-release-virtual
 
-<img src="./images/maven-yaml.png" width="80%" style="margin-left: 100px" >
+<img src="./images/maven-yaml.png" width="100%"  >
 
                 2.6 build & deploy to artifactory
                 
                         ./cli_maven_build.sh
 
-<img src="./images/maven-install.png" width="80%" style="margin-left: 100px" >
+<img src="./images/maven-install.png" width="100%"  >
 
                 2.7 查看上传的制品和扫描的漏洞
 
-<img src="./images/check-repo.png" width="80%" style="margin-left: 100px" >
+<img src="./images/check-repo.png" width="100%"  >
 
         3. 使用 JFrog CLI 对本地 war 包进行 Xray 扫描
 
                 jf s multi3/target/multi3-4.7-SNAPSHOT.war
 
-<img src="./images/jf-scan.png" width="80%" style="margin-left: 100px" >
+<img src="./images/jf-scan.png" width="100%"  >
 
         4. 配置 Xray 的监控策略，阻止漏洞组件的下载使用
 
                 4.1 创建 policy
 
-<img src="./images/policy.png" width="80%" style="margin-left: 100px" >
+<img src="./images/policy.png" width="100%"  >
 
                 4.2 设置 rule 的规则如果包含高危漏洞组件，则下载
 
-<img src="./images/rule.png" width="80%" style="margin-left: 100px" >
-<img src="./images/rule1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/rule.png" width="100%"  >
+<img src="./images/rule1.png" width="100%"  >
 
                 4.3 创建 policy, rule, watch，为 watch 选中所有仓库和 rule
 
-<img src="./images/watch.png" width="80%" style="margin-left: 100px" >
-<img src="./images/watch1.png" width="80%" style="margin-left: 100px" >
-<img src="./images/watch2.png" width="80%" style="margin-left: 100px" >
+<img src="./images/watch.png" width="100%"  >
+<img src="./images/watch1.png" width="100%"  >
+<img src="./images/watch2.png" width="100%"  >
 
                 4.4 为仓库中已有的制品点击扫描生成违反警告
 
-<img src="./images/watch3.png" width="80%" style="margin-left: 100px" >
+<img src="./images/watch3.png" width="100%"  >
 
                 4.5 再次查看仓库中制品，尝试下载，发现已被阻止
 
-<img src="./images/block.png" width="80%" style="margin-left: 100px" >
+<img src="./images/block.png" width="100%"  >
 
 
 
@@ -206,7 +206,7 @@
 
                 - 选择1，通过 docker desktop 页面更改后重启
 
-<img src="./images/restart-docker.png" width="80%" style="margin-left: 100px" >
+<img src="./images/restart-docker.png" width="100%"  >
 
                 - 选择2，也可以通过命令更改这个配置（文件位置可能由于你的操作系统而不同）
                 
@@ -238,18 +238,18 @@
                         
                         docker push 39.106.70.224:8082/team1-docker-dev-local/maven-example
 
-<img src="./images/push.png" width="80%" style="margin-left: 100px" >
+<img src="./images/push.png" width="100%"  >
 
         3. 在 artifacotry docker 镜像仓库中查看被上传的镜像
 
                 你的 docker 仓库名称为 team1-docker-dev-local 等
 
-<img src="./images/docker-repo.png" width="80%" style="margin-left: 100px" >
+<img src="./images/docker-repo.png" width="100%"  >
 
         4. 对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
 
-<img src="./images/docker-issue.png" width="80%" style="margin-left: 100px" >
-<img src="./images/docker-issue1.png" width="80%" style="margin-left: 100px" >
+<img src="./images/docker-issue.png" width="100%"  >
+<img src="./images/docker-issue1.png" width="100%"  >
 
 
 
