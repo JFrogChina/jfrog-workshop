@@ -239,7 +239,7 @@
 
         3. 在 artifacotry docker 镜像仓库中查看被上传的镜像
 
-                你的 docker 仓库名称为 team1-docker1-dev-local 等
+                你的 docker 仓库名称为 team1-docker-dev-local 等
 
 <img src="./images/docker-repo.png" width="80%" style="margin-left: 100px" >
 
