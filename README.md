@@ -44,17 +44,60 @@
                 - 选择1，直接安装以下工具
                 
                         - jfrog cli
-                        https://www.jfrog.com/confluence/display/CLI/JFrog+CLI
+                        
+                                请按以下链接中指引操作，支持 mac, linux, windows
+                                https://www.jfrog.com/confluence/display/CLI/JFrog+CLI
 
                         - java
+
+                                - 通过安装包安装
+                                https://www.oracle.com/java/technologies/downloads/
+
+<img src="./images/java.png" width="100%"  >
+
+                                下载后解压到某个路径下，如
+                                /opt/jdk1.8.0_281
+                                
+                                后将路径加入到 PATH 环境变量中，在 linux 下操作如下：
+                                vi /etc/profile
+                                export PATH=$PATH:/opt/jdk1.8.0_281/bin/
+                                source /etc/profile
+
+                                如果是在 windows 下请在电脑的环境变量设置中添加，如
+                                /opt/jdk1.8.0_281/bin/
+
+                                - 通过 yum 安装
+                                yum -y install java
+
                         - maven
-                        - wget
-                        - unzip
 
-                - 选择2，从以上实验材料中获得 docker 镜像的导出包，其中已经安装以上工具
+                                - 通过安装包安装（mac, linux, windows）
+                                https://maven.apache.org/download.cgi
 
-                        centos-jfrog-amd64.tar
-                        centos-jfrog-arm64.tar
+<img src="./images/maven.png" width="100%"  >
+
+                                下载后解压到某个路径下，如
+                                /opt/apache-maven-3.6.0
+
+<img src="./images/maven1.png" width="100%"  >
+
+                                后将路径加入到 PATH 环境变量中，在 linux 下操作如下：
+                                vi /etc/profile
+                                export PATH=$PATH:/opt/apache-maven-3.6.0/bin/
+                                source /etc/profile
+
+                                如果是在 windows 下请在电脑的环境变量设置中添加，如
+                                /opt/apache-maven-3.6.0/bin/
+
+                                - 通过 yum 安装
+                                yum install -y maven
+
+                        - unzip（解压工具，可选）
+
+                - 选择2，从以上实验材料中获得 docker 镜像的导出包，其中已经安装以上工具( jfrog cli, java, maven, unzip)
+
+                        centos-jfrog-amd64.tar (适合一般电脑使用)
+                        centos-jfrog-arm64.tar (适合 arm 架构电脑使用，例如 mac m1, m2)
                         ...
 
 <img src="./images/guide1.png" width="100%"  >
@@ -113,10 +156,19 @@
 
                 2.2 运行
                 
-                        进入到 maven-example.zip 所在目录下，以下命令会挂载当前目录，使你在 docker 容器中能够访问到 maven-example.zip
-                        选择适合你电脑型号的镜像
+                        将实验材料中 maven-example.zip 拷贝到某个不包含中文、不包含空格的目录下，例如
+                        /Users/kyle/Downloads/workshop
 
-                        docker run -it --name centos-jfrog-arm64 -v $(pwd):/root centos:jfrog-amd64 bash
+                        进入到这个目录下
+                        cd /Users/kyle/Downloads/workshop
+
+                        运行以下命令，它会挂载当前目录，使你在 docker 容器中能够访问到 maven-example.zip
+                        选择适合你电脑型号的镜像，再次提醒当前路径不要包含中文、空格
+
+                        - 此命令适合一般电脑
+                        docker run -it --name centos-jfrog-amd64 -v $(pwd):/root centos:jfrog-amd64 bash
+                        
+                        - 此命令适合 arm 架构电脑，例如 mac m1, m2 型号
                         docker run -it --name centos-jfrog-arm64 -v $(pwd):/root centos:jfrog-arm64 bash
 
                         启动后可以做一些检查
