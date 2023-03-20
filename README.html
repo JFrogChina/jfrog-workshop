@@ -407,8 +407,14 @@ code {
 <pre><code>            - 选择2，如果现场人员提供了 USB，也可以从中拷贝以上材料
 
     3. 构建环境
+
+            - 选择1，如果你的电脑上装有 docker，可以从以上实验材料中获得 docker 镜像的导出包，其中已经安装 jfrog cli, java, maven, unzip 这些工具
+
+                    centos-jfrog-amd64.tar (适合一般电脑使用)
+                    centos-jfrog-arm64.tar (适合 arm 架构电脑使用，例如 mac m1, m2)
+                    ...
     
-            - 选择1，直接安装以下工具
+            - 选择2，也可以在电脑上直接安装以下工具
             
                     - jfrog cli
                     
@@ -457,12 +463,6 @@ code {
                             yum install -y maven
 
                     - unzip（解压工具，可选）
-
-            - 选择2，从以上实验材料中获得 docker 镜像的导出包，其中已经安装以上工具( jfrog cli, java, maven, unzip)
-
-                    centos-jfrog-amd64.tar (适合一般电脑使用)
-                    centos-jfrog-arm64.tar (适合 arm 架构电脑使用，例如 mac m1, m2)
-                    ...
 </code></pre>
 <img src="./images/guide1.png" width="100%"  >
 <pre><code>    4. maven 项目
