@@ -403,18 +403,22 @@ code {
 </code></pre>
 </li>
 </ul>
-<img src="./images/guide.png" width="100%"  >
-<pre><code>            - 选择2，如果现场人员提供了 USB，也可以从中拷贝以上材料
-
-    3. 构建环境
+<div align="right">
+        <img src="./images/guide.png" style="width: 800px;" >
+</div>
+                - 选择2，如果现场人员提供了 USB，也可以从中拷贝以上材料
+<pre><code>    3. 构建环境
 
             - 选择1，如果你的电脑上装有 docker，可以从以上实验材料中获得 docker 镜像的导出包，其中已经安装 jfrog cli, java, maven, unzip 这些工具
 
                     centos-jfrog-amd64.tar (适合一般电脑使用)
                     centos-jfrog-arm64.tar (适合 arm 架构电脑使用，例如 mac m1, m2)
                     ...
-    
-            - 选择2，也可以在电脑上直接安装以下工具
+</code></pre>
+<div align="right">
+        <img src="./images/guide1.png" style="width: 800px;" >
+</div>
+<pre><code>            - 选择2，也可以在电脑上直接安装以下工具
             
                     - jfrog cli
                     
@@ -426,7 +430,9 @@ code {
                             - 通过安装包安装
                             https://www.oracle.com/java/technologies/downloads/
 </code></pre>
-<img src="./images/java.png" width="100%"  >
+<div align="right">
+        <img src="./images/java.png" style="width: 800px;" >
+</div>
 <pre><code>                            下载后解压到某个路径下，如
                             /opt/jdk1.8.0_281
                             
@@ -446,11 +452,15 @@ code {
                             - 通过安装包安装（mac, linux, windows）
                             https://maven.apache.org/download.cgi
 </code></pre>
-<img src="./images/maven.png" width="100%"  >
+<div align="right">
+        <img src="./images/maven.png" style="width: 800px;" >
+</div>
 <pre><code>                            下载后解压到某个路径下，如
                             /opt/apache-maven-3.6.0
 </code></pre>
-<img src="./images/maven1.png" width="100%"  >
+<div align="right">
+        <img src="./images/maven1.png" style="width: 800px;" >
+</div>
 <pre><code>                            后将路径加入到 PATH 环境变量中，在 linux 下操作如下：
                             vi /etc/profile
                             export PATH=$PATH:/opt/apache-maven-3.6.0/bin/
@@ -463,14 +473,15 @@ code {
                             yum install -y maven
 
                     - unzip（解压工具，可选）
-</code></pre>
-<img src="./images/guide1.png" width="100%"  >
-<pre><code>    4. maven 项目
+
+    4. maven 项目
 
             从以上实验材料中获得 maven-example.zip
             此项目包含 log4j 等漏洞组件，也可以从 github 下载 https://github.com/kyle11235/maven-example/
 </code></pre>
-<img src="./images/guide2.png" width="100%"  >
+<div align="right">
+        <img src="./images/guide2.png" style="width: 800px;" >
+</div>
 <ul>
 <li>
 <p>开始实验</p>
@@ -491,19 +502,29 @@ code {
 </code></pre>
 </li>
 </ul>
-<img src="./images/local1.png" width="100%"  >
+<div align="right">
+        <img src="./images/local1.png" style="width: 800px;" >
+</div>
 <pre><code>            1.2 注意为 local 和 remote 仓库开启 Xray 索引
 </code></pre>
-<img src="./images/local2.png" width="100%"  >
-<img src="./images/remote.png" width="100%"  >
+<div align="right">
+        <img src="./images/local2.png" style="width: 800px;" >
+</div>
+<div align="right">
+        <img src="./images/remote.png" style="width: 800px;" >
+</div>
 <pre><code>            1.3 创建 2个 maven 虚拟仓库
 </code></pre>
-<img src="./images/virtual2.png" width="100%"  >
+<div align="right">
+        <img src="./images/virtual2.png" style="width: 800px;" >
+</div>
 <pre><code>            虚拟仓库中包含 local 和 remote 类型仓库，如
             team1-maven-snapshot-virtual 包含 team1-maven-snapshot-local 和 team1-maven-central-remote
             team1-maven-release-virtual 包含 team1-maven-release-local 和 team1-maven-central-remote
 </code></pre>
-<img src="./images/virtual1.png" width="100%"  >
+<div align="right">
+        <img src="./images/virtual1.png" style="width: 800px;" >
+</div>
 <pre><code>    2. 使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
 
             2.1 如果你使用提供的 docker 镜像导出文件作为构建环境，先导入镜像
@@ -511,7 +532,9 @@ code {
                     docker load &lt; centos-jfrog-amd64.tar
                     docker load &lt; centos-jfrog-arm64.tar
 </code></pre>
-<img src="./images/load.png" width="100%"  >
+<div align="right">
+        <img src="./images/load.png" style="width: 800px;" >
+</div>
 <pre><code>            2.2 运行
             
                     将实验材料中 maven-example.zip 拷贝到某个不包含中文、不包含空格的目录下，例如
@@ -536,7 +559,9 @@ code {
                     java -version
                     mvn -v
 </code></pre>
-<img src="./images/run.png" width="100%"  >
+<div align="right">
+        <img src="./images/run.png" style="width: 800px;" >
+</div>
 <pre><code>            2.3 configure jfrog cli
             
                     jf c add
@@ -544,8 +569,12 @@ code {
                     e.g.
                     server ID = art-china (please use this ID for later maven demo)
 </code></pre>
-<img src="./images/jf-c-add.png" width="100%"  >
-<img src="./images/jf-c-add1.png" width="100%"  >
+<div align="right">
+        <img src="./images/jf-c-add.png" style="width: 800px;" >
+</div>
+<div align="right">
+        <img src="./images/jf-c-add1.png" style="width: 800px;" >
+</div>
 <pre><code>            2.4 进入 maven 项目目录
             
                     cd ~
@@ -562,46 +591,72 @@ code {
                     team1-maven-snapshot-virtual
                     team1-maven-release-virtual
 </code></pre>
-<img src="./images/maven-yaml.png" width="100%"  >
+<div align="right">
+        <img src="./images/maven-yaml.png" style="width: 800px;" >
+</div>
 <pre><code>            2.6 build &amp; deploy to artifactory
             
                     ./cli_maven_build.sh
 </code></pre>
-<img src="./images/maven-install.png" width="100%"  >
+<div align="right">
+        <img src="./images/maven-install.png" style="width: 800px;" >
+</div>
 <pre><code>            2.7 查看上传的制品和扫描的漏洞
 </code></pre>
-<img src="./images/check-repo.png" width="100%"  >
+<div align="right">
+        <img src="./images/check-repo.png" style="width: 800px;" >
+</div>
 <pre><code>    3. 使用 JFrog CLI 对本地 war 包进行 Xray 扫描
 
             jf s multi3/target/multi3-4.7-SNAPSHOT.war
 </code></pre>
-<img src="./images/jf-scan.png" width="100%"  >
+<div align="right">
+        <img src="./images/jf-scan.png" style="width: 800px;" >
+</div>
 <pre><code>    4. 配置 Xray 的监控策略，阻止漏洞组件的下载使用
 
             4.1 创建 policy
 </code></pre>
-<img src="./images/policy.png" width="100%"  >
+<div align="right">
+        <img src="./images/policy.png" style="width: 800px;" >
+</div>
 <pre><code>            4.2 设置 rule 的规则如果包含高危漏洞组件，则下载
 </code></pre>
-<img src="./images/rule.png" width="100%"  >
-<img src="./images/rule1.png" width="100%"  >
+<div align="right">
+        <img src="./images/rule.png" style="width: 800px;" >
+</div>
+<div align="right">
+        <img src="./images/rule1.png" style="width: 800px;" >
+</div>
 <pre><code>            4.3 创建 policy, rule, watch，为 watch 选中所有仓库和 rule
 </code></pre>
-<img src="./images/watch.png" width="100%"  >
-<img src="./images/watch1.png" width="100%"  >
-<img src="./images/watch2.png" width="100%"  >
+<div align="right">
+        <img src="./images/watch.png" style="width: 800px;" >
+</div>
+<div align="right">
+        <img src="./images/watch1.png" style="width: 800px;" >
+</div>
+<div align="right">
+        <img src="./images/watch2.png" style="width: 800px;" >
+</div>
 <pre><code>            4.4 为仓库中已有的制品点击扫描生成违反警告
 </code></pre>
-<img src="./images/watch3.png" width="100%"  >
+<div align="right">
+        <img src="./images/watch3.png" style="width: 800px;" >
+</div>
 <pre><code>            4.5 再次查看仓库中制品，尝试下载，发现已被阻止
 </code></pre>
-<img src="./images/block.png" width="100%"  >
+<div align="right">
+        <img src="./images/block.png" style="width: 800px;" >
+</div>
 <h2 id="%E5%AE%9E%E9%AA%8C-2---docker-build--scan-demo">实验 2 - docker build &amp; scan demo</h2>
 <pre><code>    1. 在你的开发环境，为了访问未开启 https 的镜像仓库，做以下更改，重启 docker
 
             - 选择1，通过 docker desktop 页面更改后重启
 </code></pre>
-<img src="./images/restart-docker.png" width="100%"  >
+<div align="right">
+        <img src="./images/restart-docker.png" style="width: 800px;" >
+</div>
 <pre><code>            - 选择2，也可以通过命令更改这个配置（文件位置可能由于你的操作系统而不同）
             
                     vi /etc/docker/daemon.json
@@ -632,16 +687,24 @@ code {
                     
                     docker push 39.106.70.224:8082/team1-docker-dev-local/maven-example
 </code></pre>
-<img src="./images/push.png" width="100%"  >
+<div align="right">
+        <img src="./images/push.png" style="width: 800px;" >
+</div>
 <pre><code>    3. 在 artifacotry docker 镜像仓库中查看被上传的镜像
 
             你的 docker 仓库名称为 team1-docker-dev-local 等
 </code></pre>
-<img src="./images/docker-repo.png" width="100%"  >
+<div align="right">
+        <img src="./images/docker-repo.png" style="width: 800px;" >
+</div>
 <pre><code>    4. 对于 docker 镜像，Xray 可对其进行深度扫描，并让你知道漏洞所在的具体层级
 </code></pre>
-<img src="./images/docker-issue.png" width="100%"  >
-<img src="./images/docker-issue1.png" width="100%"  >
+<div align="right">
+        <img src="./images/docker-issue.png" style="width: 800px;" >
+</div>
+<div align="right">
+        <img src="./images/docker-issue1.png" style="width: 800px;" >
+</div>
 
 </body>
 </html>
