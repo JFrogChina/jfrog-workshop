@@ -5,17 +5,11 @@
 
 - 描述
 
-        1. 小张（制品库管理）
-        从 0 开始创建 Artifactory 仓库，配置 Xray 索引
-
-        2. 小王（开发）
-        使用 JFrog CLI 构建 maven 项目，将构建产物上传到 Artifactory，查看 Xray 扫描出的漏洞，如 log4j
-
-        3. 小李（开发）
-        使用 JFrog CLI 对本地 war 包进行 Xray 扫描
-
-        4. 小赵（安全管理）
-        配置 Xray 的监控策略，阻止漏洞组件的下载使用
+        1. 开发者在JFrog Artifactory配置仓库进行构建。
+        2. 开发者进行maven构建，通过Artifactory进行依赖下载。
+        3. 开发者将构建包上传到Artifactory，并进行漏洞扫描。
+        4. 开发者将构建的jar包放入docker镜像并构建镜像。
+        5. 扫描docker镜像，配置漏洞扫描策略，阻止超高危漏洞的下载。
 
 - 准备
 
