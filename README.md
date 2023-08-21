@@ -16,7 +16,8 @@
         1. artifactory 账号
         
                 e.g.
-                jfrog artifactory URL = http://artifactory-service:8082
+                jfrog artifactory URL = http://demo.jfrogchina.com:8082
+
                 username/password = team1/xxxxxx, team2/xxxxxx ...
 
                 以上由现场工作人员提供
@@ -25,7 +26,7 @@
         
                 - 选择1，登录 artifactory
                 
-                        http://artifactory-service:8082/artifactory/app1-generic-dev-local/
+                        http://demo.jfrogchina.com:8082/artifactory/app1-generic-dev-local/
 
                         访问 app1-generic-dev-local 仓库，可以从中下载本次实验材料，按需下载，节省时间
 <div align="right">
@@ -313,8 +314,8 @@
 
                         {
                                 "insecure-registries": [
-                                "artifactory-service:8081",
-                                "artifactory-service:8082"
+                                "demo.jfrogchina.com:8081",
+                                "demo.jfrogchina.com:8082"
                                 ]
                         }
 
@@ -327,15 +328,15 @@
 
                 2.1 构建镜像，注意 build 端口是 8082
                 
-                        docker build -t artifactory-service:8082/team1-docker-dev-local/maven-example .
+                        docker build -t demo.jfrogchina.com:8082/team1-docker-dev-local/maven-example .
                 
                 2.3 登录镜像仓库，注意 login 端口是 8081, 输入你的密码
                 
-                        docker login -u team1 artifactory-service:8081
+                        docker login -u team1 demo.jfrogchina.com:8081
 
                 2.3 登录后执行上传，注意 push 端口是 8082
                         
-                        docker push artifactory-service:8082/team1-docker-dev-local/maven-example
+                        docker push demo.jfrogchina.com:8082/team1-docker-dev-local/maven-example
 
 <div align="right">
         <img src="./images/push.png" style="width: 800px;" >
